@@ -1,0 +1,49 @@
+<div id="FormDiv">
+  <%= render 'form' %>
+</div>
+
+<h1>Current jobs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @active.each do |job| %>
+  <tr id="job<%= job.id %>">
+    <td><%= job.name %></td>
+    <td><%= job.description %></td>
+   <!-- <td><%= link_to 'Show', job %></td>  -->
+    <td><%= link_to 'Edit', edit_job_path(job), :remote=>true %></td>
+    <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
+  </tr>
+<% end %>
+</table>
+<h1>Done jobs</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @done.each do |job| %>
+      <tr id="job<%= job.id %>">
+        <td class="<%= "donejobs" if (job.finished?) %>"> <%= job.name %></td>
+        <td class="<%= "donejobs" if (job.finished?)%>" <%= job.description %></td>
+        <!-- <td><%= link_to 'Show', job %></td>  -->
+        <td><%= link_to 'Edit', edit_job_path(job), :remote=>true %></td>
+        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+
+<!-- <%= link_to 'New Job', new_job_path %> -->
