@@ -1,8 +1,9 @@
 class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
+  helper_method :project
   def index
-    jobs = Job.by_time
+    jobs = Job.where(:project_id => params[:project_id]).by_time
     @job = Job.new
     @active = jobs.unfinished
     @done = jobs.finished
@@ -32,11 +33,11 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.json
   def create
-    @job = Job.new(params[:job])
+    @job = project.jobs.new(params[:job])
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to jobs_path, notice: 'Job was successfully created.' }
+        format.html { redirect_to project_jobs_path(project), notice: 'Job was successfully created.' }
         #format.json { render json: @job, status: :created, location: @job }
       else
         format.html { render action: "new" }
@@ -48,11 +49,11 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   # PUT /jobs/1.json
   def update
-    @job = Job.find(params[:id])
+    @job = project.jobs.find(params[:id])
 
     respond_to do |format|
       if @job.update_attributes(params[:job])
-        format.html { redirect_to jobs_path, notice: 'Job was successfully updated.' }
+        format.html { redirect_to project_jobs_path(project), notice: 'Job was successfully updated.' }
         format.js
         #format.json { head :no_content }
       else
@@ -65,8 +66,13 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
-    @job = Job.find(params[:id])
+    @job = project.jobs.find(params[:id])
     @job.destroy
 
   end
+
+  private
+    def project
+      @project ||=Project.find(params[:project_id])
+    end
 end

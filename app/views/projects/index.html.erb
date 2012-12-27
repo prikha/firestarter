@@ -14,8 +14,9 @@
       <tr id="project<%= project.id %>">
         <td><%= project.name %></td>
         <td><%= project.descr %></td>
-        <td><%= link_to 'Edit', edit_project_path(project), :remote=>true %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
+        <td><%= link_to 'Show', project_jobs_path(project) %></td>
+        <td><%#= link_to 'Edit', edit_project_path(project), :remote=>true %></td>
+        <td><%#= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
       </tr>
   <% end %>
 </table>

@@ -17,9 +17,9 @@
   <tr id="job<%= job.id %>">
     <td><%= job.name %></td>
     <td><%= job.description %></td>
-   <!-- <td><%= link_to 'Show', job %></td>  -->
-    <td><%= link_to 'Edit', edit_job_path(job), :remote=>true %></td>
-    <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
+   <!-- <td><%#= link_to 'Show', job %></td>  -->
+    <td><%= link_to 'Edit', edit_project_job_path(project, job), :remote=>true %></td>
+    <td><%= link_to 'Destroy', [project,job], method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
   </tr>
 <% end %>
 </table>
@@ -37,13 +37,13 @@
       <tr id="job<%= job.id %>">
         <td class="<%= "donejobs" if (job.finished?) %>"> <%= job.name %></td>
         <td class="<%= "donejobs" if (job.finished?)%>" <%= job.description %></td>
-        <!-- <td><%= link_to 'Show', job %></td>  -->
-        <td><%= link_to 'Edit', edit_job_path(job), :remote=>true %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
+        <!-- <td><%#= link_to 'Show', job %></td>  -->
+        <td><%= link_to 'Edit', edit_project_job_path(project, job), :remote=>true %></td>
+        <td><%= link_to 'Destroy', [project, job], method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
       </tr>
   <% end %>
 </table>
 
 <br />
 
-<!-- <%= link_to 'New Job', new_job_path %> -->
+<!-- <%= link_to 'New Job', new_project_job_path %> -->
