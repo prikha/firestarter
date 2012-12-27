@@ -1,0 +1,21 @@
+
+<h1>Current projects</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @projects.each do |project| %>
+      <tr id="project<%= project.id %>">
+        <td><%= project.name %></td>
+        <td><%= project.descr %></td>
+        <td><%= link_to 'Edit', edit_project_path(project), :remote=>true %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %></td>
+      </tr>
+  <% end %>
+</table>
