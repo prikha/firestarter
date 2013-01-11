@@ -2,6 +2,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   helper_method :project
+  before_filter :authenticate_user!
   def index
     jobs = Job.where(:project_id => params[:project_id]).by_time
     @job = Job.new
